@@ -5,7 +5,7 @@ This is a HTML website that is hosted with Node JS. Its purpose is to collect fo
 IDE used: Visual Studio Code
 
 ## :computer:Installation
-1. Clone this repository or download the files and import them into Visual Studio Code or an IDE of your choice.
+1. Download the files and import them into Visual Studio Code or an IDE of your choice.
 2. In the console / terminal type: ```node - v``` to ensure that Node.js is installed properly on your device.
 3. In the console / terminal type: ```npm install mongodb``` to install the mongodb driver.
 4. If you don't already have a MongoDB database, you can create one for free with an account here: https://www.mongodb.com/cloud/atlas with the help of this segment of video: https://youtu.be/fbYExfeFsI0?t=150
