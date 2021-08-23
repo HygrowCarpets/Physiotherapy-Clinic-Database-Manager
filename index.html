@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>
+        <style>
+            /*THIS CSS IS PRETTY SELF EXPLANATORY*/
+            .container {
+                position: relative;
+                border: 1px solid black;
+                margin: 20px;
+            }
+
+            .title {
+                position: relative;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid black;
+            }
+
+            .button {
+                position: relative;
+
+                right: 20px;
+
+                background-color: rgb(126, 212, 126);
+                border-radius: 3px;
+
+                font-size: 17px;
+            }
+
+            .button-container {
+                position: absolute;
+
+                right: 0px;
+
+            }
+
+            h2 {
+                margin: 0%;
+                margin-left: 20px;
+            }
+
+            p {
+                margin: 0%;
+                margin-left: 40px;
+            }
+
+            .content {
+                position: relative;
+            }
+
+            table {
+                margin: 25px 0px;
+                border-collapse: collapse;
+            }
+
+            table th {
+                text-align: left;
+                padding: 0px 50px;
+            }
+
+            table td {
+                padding: 0px 50px;
+            }
+
+            .modal-background {
+                height: 100%;
+                width: 100%;
+
+                background-color: rgba(0, 0, 0, 0.7);
+
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                z-index: 1;
+
+                display: none;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .modal-content {
+                position: relative;
+                border-radius: 5px;
+                background-color: white;
+                height: 800px;
+                width: 800px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            form {
+                font-size: 20px;
+            }
+            
+            .row {
+                text-align: right;
+                margin: 20px auto;
+            }
+
+            .x-button {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: red;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!--Reference https://www.youtube.com/watch?v=gLWIYk0Sd38&t=1036s-->
+
+        <!--THESE ARE ALL THE MODAL FORMS-->
+
+        <!--CREATE MODALS-->
+        <div class = "modal-background physiotherapist-modal">
+            <div class = "modal-content" style = "height: 600px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/physotherapist">
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">Title</label> 
+                        <input id="title" name="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstnames" class="col-4 col-form-label">First Name(s)*</label> 
+                        <input id="firstnames" name="firstnames" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="surname" class="col-4 col-form-label">Surname*</label> 
+                        <input id="surname" name="surname" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="mobilephone" class="col-4 col-form-label">Mobile Phone*</label> 
+                        <input id="mobilephone" name="mobilephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="homephone" class="col-4 col-form-label">Home Phone*</label> 
+                        <input id="homephone" name="homephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailaddress" class="col-4 col-form-label">Email Address*</label> 
+                        <input id="emailaddress" name="emailaddress" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline1" class="col-4 col-form-label">Address  Line  1*</label> 
+                        <input id="addressline1" name="addressline1" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline2" class="col-4 col-form-label">Address  Line  2</label> 
+                        <input id="addressline2" name="addressline2" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="town" class="col-4 col-form-label">Town*</label> 
+                        <input id="town" name="town" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="countycity" class="col-4 col-form-label">County/City*</label> 
+                        <input id="countycity" name="countycity" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="eircode" class="col-4 col-form-label">EIRCODE</label> 
+                        <input id="eircode" name="eircode" type="text" class="form-control">
+                    </div> 
+                    <div class="form-group row">
+                      <div class="offset-4 col-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+
+                  <button id = "physiotherapist-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background clients-modal">
+            <div class = "modal-content" style = "height: 900px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/clients">
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">Title</label> 
+                        <input id="title" name="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstnames" class="col-4 col-form-label">First Name(s)*</label> 
+                        <input id="firstnames" name="firstnames" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="surname" class="col-4 col-form-label">Surname*</label> 
+                        <input id="surname" name="surname" type="text" class="form-control" required="required">
+                     </div>
+                    <div class="form-group row">
+                        <label for="mobilephone" class="col-4 col-form-label">Mobile Phone*</label> 
+                        <input id="mobilephone" name="mobilephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="homephone" class="col-4 col-form-label">Home Phone*</label> 
+                        <input id="homephone" name="homephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailaddress" class="col-4 col-form-label">Email Address*</label> 
+                        <input id="emailaddress" name="emailaddress" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline1" class="col-4 col-form-label">Address  Line  1*</label> 
+                        <input id="addressline1" name="addressline1" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline2" class="col-4 col-form-label">Address  Line  2</label> 
+                        <input id="addressline2" name="addressline2" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="town" class="col-4 col-form-label">Town*</label> 
+                        <input id="town" name="town" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="countycity" class="col-4 col-form-label">County/City*</label> 
+                        <input id="countycity" name="countycity" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="eircode" class="col-4 col-form-label">EIRCODE</label> 
+                        <input id="eircode" name="eircode" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="dateofbirth" class="col-4 col-form-label">Date of Birth*</label> 
+                        <input id="dateofbirth" name="dateofbirth" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">Are you under 18?</label> 
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="under18" id="under-18" type="checkbox" class="custom-control-input" value="yes"> 
+                            <label for="under18_0" class="custom-control-label">Yes</label>
+                        </div>
+                    </div>
+                    <div id = "parent-guardian-div" class="form-group row">
+                        <label id = "parent-guardian-label"for="text" class="col-4 col-form-label">Parent/Guardian Name*</label> 
+                        <input id = "parent-guardian-name" name="text" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">Permission to leave message on Mobile Phone</label> 
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="message" id="message_0" type="checkbox" class="custom-control-input" value="permission"> 
+                            <label for="message" class="custom-control-label">Yes</label>
+                          </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text1" class="col-4 col-form-label">Date for Record Creation (registered)*</label> 
+                        <input id="text1" name="date" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="doctor" class="col-4 col-form-label">Doctor*</label> 
+                        <input id="doctor" name="doctor" type="text" class="form-control" required="required">
+                    </div>
+                      <div class="form-group row">
+                        <label for="referred" class="col-4 col-form-label">Referred By*</label> 
+                        <input id="referred" name="referred" type="text" class="form-control" required="required">
+                    </div> 
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                  </form>
+
+                  <button id = "client-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background session-modal">
+            <div class = "modal-content" style = "height: 600px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/sessions">
+                    <form>
+                        <div class="form-group row">
+                            <label for="session-date" class="col-4 col-form-label">Session Date*</label> 
+                            <input id="session-date" name="sessiondate" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-time" class="col-4 col-form-label">Session  Time</label> 
+                            <input id="session-time" name="sessiontime" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="client" class="col-4 col-form-label">Client*</label> 
+                            <input id="client" name="client" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="physiotherapist" class="col-4 col-form-label">Physiotherapist*</label> 
+                            <input id="physiotherapist" name="physiotherapist" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="fee" class="col-4 col-form-label">Fee(euro)*</label> 
+                            <input id="fee" name="fee" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-number" class="col-4 col-form-label">Session Number*</label> 
+                            <input id="session-number" name="sessionnumber" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-duration" class="col-4 col-form-label">Session Duration/Cancelled/No Show*</label> 
+                            <input id="session-duration" name="sessionduration" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-type" class="col-4 col-form-label">Session Type*</label> 
+                            <input id="session-type" name="sessiontype" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-notes" class="col-4 col-form-label">Session Notes*</label> 
+                            <input id="session-notes" name="sessionnotes" type="text" class="form-control" required="required">
+                        </div> 
+                        <div class="form-group row">
+                          <div class="offset-4 col-8">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                  </form>
+
+                  <button id = "session-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+        <!--UPDATE MODALS-->
+        <div class = "modal-background physiotherapist-update-modal">
+            <div class = "modal-content" style = "height: 600px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/physiotherapist/update">
+                    <div class="form-group row">
+                        <label for="update" class="col-4 col-form-label">Name of form to update</label> 
+                        <input id="update" name="nameToFind" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">Title</label> 
+                        <input id="title" name="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstnames" class="col-4 col-form-label">First Name(s)*</label> 
+                        <input id="firstnames" name="firstnames" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="surname" class="col-4 col-form-label">Surname*</label> 
+                        <input id="surname" name="surname" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="mobile-phone" class="col-4 col-form-label">Mobile Phone*</label> 
+                        <input id="mobile-phone" name="mobilephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="home-phone" class="col-4 col-form-label">Home Phone*</label> 
+                        <input id="home-phone" name="homephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="email-address" class="col-4 col-form-label">Email Address*</label> 
+                        <input id="email-address" name="emailaddress" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="address-line-1" class="col-4 col-form-label">Address  Line  1*</label> 
+                        <input id="address-line-1" name="addressline1" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="address-line-2" class="col-4 col-form-label">Address  Line  2</label> 
+                        <input id="address-line-2" name="addressline2" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="town" class="col-4 col-form-label">Town*</label> 
+                        <input id="town" name="town" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="county-city" class="col-4 col-form-label">County/City*</label> 
+                        <input id="county-city" name="countycity" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="eircode" class="col-4 col-form-label">EIRCODE</label> 
+                        <input id="eircode" name="eircode" type="text" class="form-control">
+                    </div> 
+                    <div class="form-group row">
+                      <div class="offset-4 col-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+
+                  <button id = "physiotherapist-update-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background client-update-modal">
+            <div class = "modal-content" style = "height: 1000px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/client/update">
+                    <div class="form-group row">
+                        <label for="update" class="col-4 col-form-label">Name of form to update</label> 
+                        <input id="update" name="nameToFind" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">Title</label> 
+                        <input id="title" name="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstnames" class="col-4 col-form-label">First Name(s)*</label> 
+                        <input id="firstnames" name="firstnames" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="surname" class="col-4 col-form-label">Surname*</label> 
+                        <input id="surname" name="surname" type="text" class="form-control" required="required">
+                     </div>
+                    <div class="form-group row">
+                        <label for="mobilephone" class="col-4 col-form-label">Mobile Phone*</label> 
+                        <input id="mobilephone" name="mobilephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="homephone" class="col-4 col-form-label">Home Phone*</label> 
+                        <input id="homephone" name="homephone" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailaddress" class="col-4 col-form-label">Email Address*</label> 
+                        <input id="emailaddress" name="emailaddress" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline1" class="col-4 col-form-label">Address  Line  1*</label> 
+                        <input id="addressline1" name="addressline1" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressline2" class="col-4 col-form-label">Address  Line  2</label> 
+                        <input id="addressline2" name="addressline2" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="town" class="col-4 col-form-label">Town*</label> 
+                        <input id="town" name="town" type="text" required="required" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="countycity" class="col-4 col-form-label">County/City*</label> 
+                        <input id="countycity" name="countycity" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="eircode" class="col-4 col-form-label">EIRCODE</label> 
+                        <input id="eircode" name="eircode" type="text" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <label for="dateofbirth" class="col-4 col-form-label">Date of Birth*</label> 
+                        <input id="dateofbirth" name="dateofbirth" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">Are you under 18?</label> 
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="under18" id="under-18" type="checkbox" class="custom-control-input" value="yes"> 
+                            <label for="under18_0" class="custom-control-label">Yes</label>
+                        </div>
+                    </div>
+                    <div id = "parent-guardian-div" class="form-group row">
+                        <label id = "parent-guardian-label"for="text" class="col-4 col-form-label">Parent/Guardian Name*</label> 
+                        <input id = "parent-guardian-name" name="parentguardian" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4">Permission to leave message on Mobile Phone</label> 
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="permission" id="message_0" type="checkbox" class="custom-control-input" value="yes"> 
+                            <label for="message" class="custom-control-label">Yes</label>
+                          </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text1" class="col-4 col-form-label">Date for Record Creation (registered)*</label> 
+                        <input id="text1" name="date" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group row">
+                        <label for="doctor" class="col-4 col-form-label">Doctor*</label> 
+                        <input id="doctor" name="doctor" type="text" class="form-control" required="required">
+                    </div>
+                      <div class="form-group row">
+                        <label for="referred" class="col-4 col-form-label">Referred By*</label> 
+                        <input id="referred" name="referred" type="text" class="form-control" required="required">
+                    </div> 
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                  </form>
+
+                  <button id = "client-update-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background session-update-modal">
+            <div class = "modal-content" style = "height: 600px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/sessions/update">
+                    <form>
+                        <div class="form-group row">
+                            <label for="update" class="col-4 col-form-label">Session Number to update</label> 
+                            <input id="update" name="sessionToFind" type="text" class="form-control">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-date" class="col-4 col-form-label">Session Date*</label> 
+                            <input id="session-date" name="sessiondate" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-time" class="col-4 col-form-label">Session  Time</label> 
+                            <input id="session-time" name="sessiontime" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="client" class="col-4 col-form-label">Client*</label> 
+                            <input id="client" name="client" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="physiotherapist" class="col-4 col-form-label">Physiotherapist*</label> 
+                            <input id="physiotherapist" name="physiotherapist" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="fee" class="col-4 col-form-label">Fee(euro)*</label> 
+                            <input id="fee" name="fee" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-number" class="col-4 col-form-label">Session Number*</label> 
+                            <input id="session-number" name="sessionnumber" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-duration" class="col-4 col-form-label">Session Duration/Cancelled/No Show*</label> 
+                            <input id="session-duration" name="sessionduration" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-type" class="col-4 col-form-label">Session Type*</label> 
+                            <input id="session-type" name="sessiontype" type="text" class="form-control" required="required">
+                        </div>
+                        <div class="form-group row">
+                            <label for="session-notes" class="col-4 col-form-label">Session Notes*</label> 
+                            <input id="session-notes" name="sessionnotes" type="text" class="form-control" required="required">
+                        </div> 
+                        <div class="form-group row">
+                          <div class="offset-4 col-8">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                  </form>
+
+                  <button id = "session-update-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+        <!--DELETE MODALS-->
+        <div class = "modal-background physiotherapist-delete-modal">
+            <div class = "modal-content" style = "height: 200px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/physiotherapist/delete">
+                    <div class="form-group row">
+                        <label for="update" class="col-4 col-form-label">Name of form to delete</label> 
+                        <input id="update" name="nameToFind" type="text" class="form-control">
+                    </div>
+                    <div class="offset-4 col-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                  </form>
+
+                  <button id = "physiotherapist-delete-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background client-delete-modal">
+            <div class = "modal-content" style = "height: 200px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/client/delete">
+                    <div class="form-group row">
+                        <label for="update" class="col-4 col-form-label">Name of form to delete</label> 
+                        <input id="update" name="nameToFind" type="text" class="form-control">
+                    </div> 
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                  </form>
+
+                  <button id = "client-delete-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+
+        <div class = "modal-background session-delete-modal">
+            <div class = "modal-content" style = "height: 200px; width: 600px;">
+                <!--https://bootstrapformbuilder.com/-->
+                <form method="POST" action = "/session/delete">
+                    <form> 
+                        <div class="form-group row">
+                            <label for="update" class="col-4 col-form-label">Session Number to delete</label> 
+                            <input id="update" name="sessionToFind" type="text" class="form-control">
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-4 col-8">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                      </form>
+                  </form>
+
+                  <button id = "session-delete-modal-close" class = "x-button">x</button>
+
+            </div>
+        </div>
+
+        <!--CONTAINER MODALS WHICH WERE SUPPOSED TO HOLD ALL THE DATA IN TABLES. HOWEVER I COULD NOT GET THE RETRIEVE FROM CRUD TO WORK-->
+        <div id = "physiotherapist-container" class = "container">
+            <div id = "container-title" class = "title" style = "background-color: rgb(190, 110, 110);">
+                <h2 class = "title-text" >Physiotherapists</h2>
+                <div class = "button-container">
+                    <button id = "physiotherapist-modal-open" class = "button">Add New Physiotherapist</button>
+                    <button id = "physiotherapist-update-modal-open" class = "button" style = "background-color: rgb(211, 216, 135);">Update Physiotherapist</button>
+                    <button id = "physiotherapist-delete-modal-open" class = "button" style = "background-color: rgb(97, 8, 8);">Delete Physiotherapist</button>
+                </div>
+            </div>
+            <div id = "container-content" class = "content">
+                <table id = "physiotherapist-table">
+                </table>
+            </div>
+        </div>
+
+
+        <div id = "clients-container" class = "container">
+            <div id = "container-title" class = "title" style = "background-color: rgb(138, 196, 219);">
+                <h2 class = "title-text" >Clients</h2>
+                <div class = "button-container">
+                    <button id = "client-modal-open" class = "button">Add New Client</button>
+                    <button id = "client-update-modal-open" class = "button" style = "background-color: rgb(211, 216, 135);">Update Client</button>
+                    <button id = "client-delete-modal-open" class = "button" style = "background-color: rgb(97, 8, 8);">Delete Clients</button>
+                </div>
+            </div>
+            <div id = "container-content" class = "content">
+                <table id = "client-table">
+                </table>
+            </div>
+        </div>
+
+
+        <div id = "sessions-container" class = "container">
+            <div id = "container-title" class = "title" style = "background-color: rgb(223, 153, 217);">
+                <h2 class = "title-text" >Sessions</h2>
+                <div class = "button-container">
+                    <button id = "session-modal-open" class = "button">Add New Session</button>
+                    <button id = "session-update-modal-open" class = "button" style = "background-color: rgb(211, 216, 135);">Update Session</button>
+                    <button id = "session-delete-modal-open" class = "button" style = "background-color: rgb(97, 8, 8);">Delete Session</button>
+                </div>
+            </div>
+            <div id = "container-content" class = "content">
+                <table id = "session-table">
+                </table>
+            </div>
+        </div>
+
+
+        <script>
+            //Most of this is just the event listeners to allow the modals to show up
+
+            //Open button for physiotherapist form
+            document.getElementById("physiotherapist-modal-open").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-modal").style.display = "flex";
+            });
+            //Close button for physiotherapist form
+            document.getElementById("physiotherapist-modal-close").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-modal").style.display = "none";
+            });
+
+            //Open button for client form
+            document.getElementById("client-modal-open").addEventListener("click" , function() {
+                document.querySelector(".clients-modal").style.display = "flex";
+            });
+            //Close button for client form
+            document.getElementById("client-modal-close").addEventListener("click" , function() {
+                document.querySelector(".clients-modal").style.display = "none";
+            });
+
+            //Open button for client form
+                document.getElementById("session-modal-open").addEventListener("click" , function() {
+                document.querySelector(".session-modal").style.display = "flex";
+            });
+            //Close button for client form
+                document.getElementById("session-modal-close").addEventListener("click" , function() {
+                document.querySelector(".session-modal").style.display = "none";
+            });
+
+            //remove the Parent/Guardian input from the form by default beacuse checkbox wont check itself with checked = "checked" on firefox so I'll have it unchecked by default
+            let myobj = document.getElementById("parent-guardian-label");
+            myobj.remove();
+            myobj = document.getElementById("parent-guardian-name");
+            myobj.remove();
+
+            document.getElementById("under-18").onclick = function() {
+                if(this.checked) {
+                    let label = document.createElement("label");
+                    label.id = "parent-guardian-label";
+                    label.innerHTML = "Parent/Guardian Name*";
+
+                    let input = document.createElement("input");
+                    input.id = "parent-guardian-name";
+                    input.required = "required";
+
+                    let div = document.getElementById("parent-guardian-div");
+
+                    div.appendChild(label);
+                    div.appendChild(input);
+                } else {
+                    let myobj = document.getElementById("parent-guardian-label");
+                    myobj.remove();
+                    myobj = document.getElementById("parent-guardian-name");
+                    myobj.remove();
+                }
+            };
+
+            //Open button for physiotherapist update form
+            document.getElementById("physiotherapist-update-modal-open").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-update-modal").style.display = "flex";
+            });
+            //Close button for physiotherapist update form
+            document.getElementById("physiotherapist-update-modal-close").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-update-modal").style.display = "none";
+            });
+
+            //Open button for client update form
+            document.getElementById("client-update-modal-open").addEventListener("click" , function() {
+                document.querySelector(".client-update-modal").style.display = "flex";
+            });
+            //Close button for client update form
+            document.getElementById("client-update-modal-close").addEventListener("click" , function() {
+                document.querySelector(".client-update-modal").style.display = "none";
+            });
+
+            //Open button for session update form
+            document.getElementById("session-update-modal-open").addEventListener("click" , function() {
+                document.querySelector(".session-update-modal").style.display = "flex";
+            });
+            //Close button for session update form
+            document.getElementById("session-update-modal-close").addEventListener("click" , function() {
+                document.querySelector(".session-update-modal").style.display = "none";
+            });
+
+            //Open button for physiotherapist delete form
+            document.getElementById("physiotherapist-delete-modal-open").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-delete-modal").style.display = "flex";
+            });
+            //Close button for physiotherapist delete form
+            document.getElementById("physiotherapist-delete-modal-close").addEventListener("click" , function() {
+                document.querySelector(".physiotherapist-delete-modal").style.display = "none";
+            });
+
+            //Open button for clients delete form
+            document.getElementById("client-delete-modal-open").addEventListener("click" , function() {
+                document.querySelector(".client-delete-modal").style.display = "flex";
+            });
+            //Close button for clients delete form
+            document.getElementById("client-delete-modal-close").addEventListener("click" , function() {
+                document.querySelector(".client-delete-modal").style.display = "none";
+            });
+
+            //Open button for session delete form
+            document.getElementById("session-delete-modal-open").addEventListener("click" , function() {
+                document.querySelector(".session-delete-modal").style.display = "flex";
+            });
+            //Close button for session delete form
+            document.getElementById("session-delete-modal-close").addEventListener("click" , function() {
+                document.querySelector(".session-delete-modal").style.display = "none";
+            });
+
+        </script>
+    </body>
+</html>
